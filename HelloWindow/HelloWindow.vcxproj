@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="api.c" />
+    <ClCompile Include="debug.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>

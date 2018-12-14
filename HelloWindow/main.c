@@ -1,3 +1,5 @@
+#define ENABLE_DEBUG
+
 #include "app.h"
 
 static TCHAR winclass[] = TEXT("mainwindow");
@@ -6,6 +8,8 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 {
 	HDC         hdc;
 	PAINTSTRUCT ps;
+
+	DEBUG("Window Message: 0x%04X", uMsg);
 
 	switch (uMsg)
 	{
@@ -28,11 +32,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	MSG msg;
 	HWND hwnd;
 
-	/* Console for DEBUG */
-	AllocConsole();
-	freopen("CONOUT$", "w", stdout);
-
-	INFO("Hello Window\n");
+	INFO("Hello Window");
 
 	window_class_create(hInstance, winclass, WndProc);
 
