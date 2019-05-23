@@ -2,7 +2,14 @@
 
 HWND MyWindowCreate(int x, int y, int width, int height)
 {
-	return CreateWindowEx(0, MyWindowClassName, TEXT("MyWindow"), WS_OVERLAPPEDWINDOW,
+	return CreateWindowEx(
+		0, // dwExStyle
+		MyWindowClassName,
+		TEXT("MyWindow"),
+		WS_OVERLAPPEDWINDOW | WS_VSCROLL,
 		x, y, width, height,
-		NULL, NULL, g_instance, NULL);
+		NULL, // hWndParent
+		NULL, // hMenu
+		g_instance,
+		NULL);
 }

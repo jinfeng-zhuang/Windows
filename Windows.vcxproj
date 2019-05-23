@@ -28,6 +28,9 @@
   <ItemGroup>
     <ClInclude Include="Source\Scrollbar\api.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Scrollbar\README.md" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A7746688-B01F-4AFB-B25E-6A3DD44F3FF0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
