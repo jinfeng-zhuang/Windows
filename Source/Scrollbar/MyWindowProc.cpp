@@ -22,18 +22,20 @@ LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 		si.cbSize = sizeof(SCROLLINFO);
 		si.fMask = SIF_RANGE | SIF_PAGE;
 		si.nMin = 0;
-		si.nMax = 10;
-		si.nPage = 1;
+		si.nMax = 1000 - 1;	// 1000 lines - 1, as start from 0
+		si.nPage = 500;	// each page contain 100 lines
 		SetScrollInfo(hWnd, SB_VERT, &si, true);
 		break;
 	case WM_VSCROLL:
-		si.fMask = SIF_RANGE;
-		GetScrollInfo(hWnd, SB_VERT, &si);
-		printf("scroll info: (%d, %d) pos = %d, cmd = %d\n", si.nMin, si.nMax, si.nPos, wParam & 0xFFFF);
+		si.fMask = SIF_RANGE | SIF_POS;
+		GetScrollInfo(hWnd, SB_VERT, &si); 
+		printf("Current Position %d, Scroll to %d, %x %x\n", si.nPos, HIWORD(wParam), wParam, lParam);
 
-		si.fMask = SIF_POS;
-		si.nPos = 5;
-		SetScrollInfo(hWnd, SB_VERT, &si, true);
+		if (SB_THUMBTRACK == LOWORD(wParam)) {
+			si.fMask = SIF_POS;
+			si.nPos = HIWORD(wParam);
+			SetScrollInfo(hWnd, SB_VERT, &si, true);
+		}
 		break;
 	case WM_KEYDOWN:
 		break;
