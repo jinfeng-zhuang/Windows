@@ -1,0 +1,5 @@
+/Debug
+*.swp
+/.vs
+*.opendb
+*.db
