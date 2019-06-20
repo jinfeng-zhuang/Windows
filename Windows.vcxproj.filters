@@ -7,38 +7,41 @@
     </Filter>
     <Filter Include="头文件">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="资源文件">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\Serial">
+      <UniqueIdentifier>{df8138a9-aab1-4e1a-a6d6-59a00b79aa25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\CustomWindowClasses">
+      <UniqueIdentifier>{9485fb4b-87aa-4845-91fd-a4e7faa38589}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Scrollbar\WinMain.cpp">
+    <ClCompile Include="Source\WinMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scrollbar\g_instance.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="Source\Serial\serial_port_list.cpp">
+      <Filter>源文件\Serial</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scrollbar\MyWindowCreate.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="Source\CustomWindowClasses\MyButton.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scrollbar\MyWindowProc.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scrollbar\MyWindowRegister.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="Source\CustomWindowClasses\CustomWindowClassesInit.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Scrollbar\api.h">
-      <Filter>源文件</Filter>
+    <ClInclude Include="Include\common.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Source\Scrollbar\README.md">
-      <Filter>源文件</Filter>
+    <None Include="README.md">
+      <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
 </Project>

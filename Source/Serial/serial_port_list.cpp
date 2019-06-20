@@ -25,7 +25,7 @@ void serial_port_list(void)
 
         status = RegEnumValue(hKey, dwIndex++, szValueName, &dwSizeValueName, NULL, &Type, szPortName, &dwSizeofPortName);
         if (status == ERROR_SUCCESS) {
-            wprintf(L"%s\n", szPortName);
+            wprintf(L"%s\n", (wchar_t *)szPortName);
         }
     } while ((status != ERROR_NO_MORE_ITEMS));
     
