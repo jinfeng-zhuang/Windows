@@ -19,7 +19,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		TEXT("MyButton"),
 		TEXT("Demo"),
 		WS_OVERLAPPEDWINDOW,
-		0, 0, 400, 400,
+		0, 0, 1000, 800,
 		NULL, // hWndParent
 		NULL, // hMenu
 		hInstance,

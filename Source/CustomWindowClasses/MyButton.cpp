@@ -1,10 +1,18 @@
 #include <Windows.h>
+#include "common.h"
+
+struct window_desc windows_desc_array[] = {
+	{0, 0, 60, 60, BS_AUTORADIOBUTTON, TEXT("None")},
+	{0, 60 + 20, 60, 60, BS_CHECKBOX, TEXT("None")},
+	{0, 80 + 60 + 20, 60, 60, BS_PUSHBUTTON, TEXT("None")},
+};
 
 static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
 	PAINTSTRUCT ps;
 	HINSTANCE hInstance;
+	int i;
 
 	//printf("Window Message: 0x%04X\n", uMsg);
 
@@ -13,16 +21,21 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 	switch (uMsg)
 	{
 	case WM_CREATE:
-		CreateWindowEx(
-			0, // dwExStyle
-			TEXT("Button"),
-			NULL, // Title
-			WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON | WS_OVERLAPPEDWINDOW,
-			0, 0, 200, 200,
-			hWnd, // hWndParent
-			NULL, // hMenu
-			hInstance,
-			NULL);
+		for (i = 0; i < sizeof(windows_desc_array) / sizeof(windows_desc_array[0]); i++) {
+			CreateWindowEx(
+				0, // dwExStyle
+				TEXT("Button"),
+				windows_desc_array[i].value, // Title
+				WS_CHILD | WS_VISIBLE | windows_desc_array[i].style,
+				windows_desc_array[i].x,
+				windows_desc_array[i].y,
+				windows_desc_array[i].width,
+				windows_desc_array[i].height,
+				hWnd, // hWndParent
+				NULL, // hMenu
+				hInstance,
+				NULL);
+		}
 		break;
 	case WM_SIZE:
 		break;
