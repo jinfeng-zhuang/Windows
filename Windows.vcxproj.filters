@@ -19,6 +19,9 @@
     <Filter Include="源文件\CustomWindowClasses">
       <UniqueIdentifier>{9485fb4b-87aa-4845-91fd-a4e7faa38589}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Clipboard">
+      <UniqueIdentifier>{ee9ff209-bac3-46b8-9819-588e4f77f690}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\WinMain.cpp">
@@ -32,6 +35,12 @@
     </ClCompile>
     <ClCompile Include="Source\CustomWindowClasses\CustomWindowClassesInit.cpp">
       <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Clipboard\Clipboard.cpp">
+      <Filter>源文件\Clipboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Clipboard\clipboard_list.cpp">
+      <Filter>源文件\Clipboard</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

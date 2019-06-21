@@ -1,11 +1,37 @@
 #include <Windows.h>
 #include "common.h"
 
-struct window_desc windows_desc_array[] = {
-	{0, 0, 60, 60, BS_AUTORADIOBUTTON, TEXT("None")},
-	{0, 60 + 20, 60, 60, BS_CHECKBOX, TEXT("None")},
-	{0, 80 + 60 + 20, 60, 60, BS_PUSHBUTTON, TEXT("None")},
+struct window_desc vertical_buttons[] = {
+	{0, 0, 200, 20, BS_PUSHBUTTON, TEXT("BS_PUSHBUTTON")},
+	{0, 0, 200, 20, BS_DEFPUSHBUTTON, TEXT("BS_DEFPUSHBUTTON")},
+	{0, 0, 200, 20, BS_CHECKBOX, TEXT("BS_CHECKBOX")},
+	{0, 0, 200, 20, BS_AUTOCHECKBOX, TEXT("BS_AUTOCHECKBOX")},
+	{0, 0, 200, 20, BS_RADIOBUTTON, TEXT("BS_RADIOBUTTON")},
+	{0, 0, 200, 20, BS_3STATE, TEXT("BS_3STATE")},
+	{0, 0, 200, 20, BS_AUTO3STATE, TEXT("BS_AUTO3STATE")},
+	{0, 0, 200, 20, BS_GROUPBOX, TEXT("BS_AUTO3STATE")},
+	{0, 0, 200, 20, BS_USERBUTTON, TEXT("BS_USERBUTTON")},
+	{0, 0, 200, 20, BS_AUTORADIOBUTTON, TEXT("BS_AUTORADIOBUTTON")},
+	{0, 0, 200, 20, BS_PUSHBOX, TEXT("BS_PUSHBOX")},
+	{0, 0, 200, 20, BS_OWNERDRAW, TEXT("BS_OWNERDRAW")},
 };
+
+static void window_position_calc(void)
+{
+	int i;
+	int x_offset, y_offset;
+	int vertical_gap = 10;
+
+	x_offset = 0;
+	y_offset = 0;
+
+	for (i = 0; i < sizeof(vertical_buttons) / sizeof(vertical_buttons[0]); i++) {
+		vertical_buttons[i].x = x_offset;
+		vertical_buttons[i].y = y_offset;
+
+		y_offset += vertical_buttons[i].height + vertical_gap;
+	}
+}
 
 static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -21,16 +47,18 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 	switch (uMsg)
 	{
 	case WM_CREATE:
-		for (i = 0; i < sizeof(windows_desc_array) / sizeof(windows_desc_array[0]); i++) {
+		window_position_calc();
+
+		for (i = 0; i < sizeof(vertical_buttons) / sizeof(vertical_buttons[0]); i++) {
 			CreateWindowEx(
 				0, // dwExStyle
 				TEXT("Button"),
-				windows_desc_array[i].value, // Title
-				WS_CHILD | WS_VISIBLE | windows_desc_array[i].style,
-				windows_desc_array[i].x,
-				windows_desc_array[i].y,
-				windows_desc_array[i].width,
-				windows_desc_array[i].height,
+				vertical_buttons[i].value, // Title
+				WS_CHILD | WS_VISIBLE | vertical_buttons[i].style,
+				vertical_buttons[i].x,
+				vertical_buttons[i].y,
+				vertical_buttons[i].width,
+				vertical_buttons[i].height,
 				hWnd, // hWndParent
 				NULL, // hMenu
 				hInstance,

@@ -1,6 +1,8 @@
 #include "common.h"
 
 extern void serial_port_list(void);
+extern void clipboard_list(void);
+extern const wchar_t* GetPredefinedClipboardFormatName(UINT format);
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
@@ -13,6 +15,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// Custom Window Class Register
 	CustomWindowClassesInit(hInstance);
 
+	clipboard_list();
+
+#if 0
 	// Custom Window Create
 	hwnd = CreateWindowEx(
 		0, // dwExStyle
@@ -27,6 +32,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	ShowWindow(hwnd, nShowCmd);
 	UpdateWindow(hwnd);
+#endif
 
 	while (GetMessage(&msg, NULL, 0, 0)) {
 		TranslateMessage(&msg);

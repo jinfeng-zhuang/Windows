@@ -145,6 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Clipboard\Clipboard.cpp" />
+    <ClCompile Include="Source\Clipboard\clipboard_list.cpp" />
     <ClCompile Include="Source\CustomWindowClasses\CustomWindowClassesInit.cpp" />
     <ClCompile Include="Source\CustomWindowClasses\MyButton.cpp" />
     <ClCompile Include="Source\Serial\serial_port_list.cpp" />
