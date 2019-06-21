@@ -10,18 +10,18 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	HWND hwnd;
 
     AllocConsole();
-    freopen("CONOUT$", "w", stdout);
+    //freopen("CONOUT$", "w", stdout);
+    freopen("log.txt", "w", stdout);
 
 	// Custom Window Class Register
 	CustomWindowClassesInit(hInstance);
 
 	clipboard_list();
 
-#if 0
 	// Custom Window Create
 	hwnd = CreateWindowEx(
 		0, // dwExStyle
-		TEXT("MyButton"),
+		TEXT("EmptyBoard"),
 		TEXT("Demo"),
 		WS_OVERLAPPEDWINDOW,
 		0, 0, 1000, 800,
@@ -32,7 +32,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	ShowWindow(hwnd, nShowCmd);
 	UpdateWindow(hwnd);
-#endif
 
 	while (GetMessage(&msg, NULL, 0, 0)) {
 		TranslateMessage(&msg);
