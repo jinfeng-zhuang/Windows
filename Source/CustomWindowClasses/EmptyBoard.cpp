@@ -17,6 +17,7 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 	switch (uMsg)
 	{
 	case WM_CREATE:
+		DragAcceptFiles(hWnd, TRUE);
 		break;
 	case WM_SIZE:
 		break;
@@ -36,6 +37,12 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
+		break;
+	case WM_DROPFILES:
+		wchar_t filename[100];
+		DragQueryFile((HDROP)wParam, 0, filename, 100);
+		DragFinish((HDROP)wParam);
+		wprintf(L"filename = %s\n", filename);
 		break;
 	default:
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);
