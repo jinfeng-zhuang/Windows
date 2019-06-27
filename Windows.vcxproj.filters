@@ -51,6 +51,9 @@
     <ClCompile Include="Source\CustomWindowClasses\EmptyBoard.cpp">
       <Filter>源文件\CustomWindowClasses</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CustomWindowClasses\TextBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\common.h">

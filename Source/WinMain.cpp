@@ -10,8 +10,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	HWND hwnd;
 
     AllocConsole();
-    //freopen("CONOUT$", "w", stdout);
-    freopen("log.txt", "w", stdout);
+    freopen("CONOUT$", "w", stdout);
+    //freopen("log.txt", "w", stdout);
 
 	// Custom Window Class Register
 	CustomWindowClassesInit(hInstance);
@@ -21,9 +21,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// Custom Window Create
 	hwnd = CreateWindowEx(
 		0, // dwExStyle
-		TEXT("EmptyBoard"),
+		TEXT("TextBoard"),
 		TEXT("Demo"),
-		WS_OVERLAPPEDWINDOW,
+		WS_OVERLAPPEDWINDOW | WS_VSCROLL| WS_HSCROLL,
 		0, 0, 1000, 800,
 		NULL, // hWndParent
 		NULL, // hMenu
