@@ -25,6 +25,9 @@
     <Filter Include="源文件\Common">
       <UniqueIdentifier>{4d673196-f398-4edb-8f95-bd87bde2ad7f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\XML">
+      <UniqueIdentifier>{f812561e-7325-46d4-96f3-3713773efe63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\WinMain.cpp">
@@ -54,9 +57,21 @@
     <ClCompile Include="Source\CustomWindowClasses\TextBoard.cpp">
       <Filter>源文件\CustomWindowClasses</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CustomWindowClasses\ArticleBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CustomWindowClasses\HTMLBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XML\tinyxml2.cpp">
+      <Filter>源文件\XML</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\common.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\tinyxml2.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

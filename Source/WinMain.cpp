@@ -21,7 +21,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// Custom Window Create
 	hwnd = CreateWindowEx(
 		0, // dwExStyle
-		TEXT("TextBoard"),
+		TEXT("HTMLBoard"),
 		TEXT("Demo"),
 		WS_OVERLAPPEDWINDOW | WS_VSCROLL| WS_HSCROLL,
 		0, 0, 1000, 800,
