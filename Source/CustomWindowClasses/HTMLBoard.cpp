@@ -2,8 +2,63 @@
 #include "common.h"
 #include "tinyxml2.h"
 
-static const char html[] = "<html><body><h1>Header1</h1><p>Hello HTML!</p></body></html>";
-static wchar_t whtml[100];
+// stored as ANSI, but restored with Unicode, I don't know why
+// there is a c code to copy data from harddisk to ddr, maybe the c code decode this
+static const wchar_t html[] = L"<html><body><h1>Header1</h1><p>Hello ÄãºÃ HTML!</p></body></html>";
+
+static wchar_t unicode_buffer[1024];
+static int unicode_buffer_length = 1024;
+
+static wchar_t utf8_buffer[1024];
+static int utf8_buffer_length = 1024;
+
+// css table
+// global: consolas
+// h1: 50
+// h2: 40
+// h3: 30
+// p:  20
+// b = i = ps
+
+struct attr {
+    const char name[32];
+    int fontsize;
+};
+
+struct attr attr_map[] = {
+    {"h1", 50},
+    {"h2", 40},
+    {"h3", 30},
+    {"p", 20},
+};
+
+int draw_text(HDC hdc, RECT rect, COLORREF bgcolor, COLORREF fgcolor, int fontsize, SIZE *size)
+{
+    DRAWTEXTPARAMS drawtextparams;
+    LOGFONT logicfont;
+    HFONT hfont;
+    int ret;
+    int i;
+
+    memset(&logicfont, 0, sizeof(logicfont));
+    wsprintf(logicfont.lfFaceName, TEXT("Consolas"));
+    logicfont.lfHeight = fontsize;
+    hfont = CreateFontIndirect(&logicfont);
+    SelectObject(hdc, hfont);
+    GetTextExtentPoint(hdc, html, lstrlen(html), size);
+
+    SetBkColor(hdc, bgcolor);
+    SetTextColor(hdc, fgcolor);
+
+    drawtextparams.cbSize = sizeof(DRAWTEXTPARAMS);
+    drawtextparams.iTabLength = 2;
+    drawtextparams.iLeftMargin = 1;
+    drawtextparams.iRightMargin = 1;
+
+    DrawTextEx(hdc, (wchar_t*)html, -1, &rect, DT_WORDBREAK | DT_EXPANDTABS, &drawtextparams);
+
+    return 0;
+}
 
 static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -22,6 +77,9 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
     tinyxml2::XMLElement *root;
     tinyxml2::XMLElement *body;
     tinyxml2::XMLElement*node;
+    int ret;
+    int i;
+    SIZE size;
 
 	//printf("Window Message: 0x%04X\n", uMsg);
 
@@ -31,16 +89,28 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 	{
 	case WM_CREATE:
 
-        doc.Parse(html);
+        // detect the encode format
+
+        // decode the ASCII/ANSI/UTF-8/... to UNICODE
+
+        //ret = MultiByteToWideChar(CP_ACP, 0, (char *)html, lstrlen(html), unicode_buffer, unicode_buffer_length);
+        //ret = WideCharToMultiByte(CP_UTF8, 0, unicode_buffer, ret, (char *)utf8_buffer, utf8_buffer_length, NULL, NULL);
+        ret = WideCharToMultiByte(CP_UTF8, 0, html, lstrlen(html), (char *)utf8_buffer, utf8_buffer_length, NULL, NULL);
+        (void)ret;
+        doc.Parse((const char *)utf8_buffer);
         root = doc.RootElement();
         if (root) {
             body = root->FirstChildElement("body");
             if (body) {
                 node = body->FirstChildElement();
-                if (node) {
+                while (node) {
                     printf("%s: %s\n", node->Value(), node->GetText());
+                    for (i = 0; i < sizeof(attr_map) / sizeof(attr_map[0]); i++) {
+                        if (0 == strcmp(node->Value(), attr_map[i].name)) {
+                            printf("size = %d\n", attr_map[i].fontsize);
+                        }
+                    }
                     node = node->NextSiblingElement();
-                    printf("%s: %s\n", node->Value(), node->GetText());
                 }
             }
         }
@@ -57,32 +127,12 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 
         GetClientRect(hWnd, &clientrect);
 
-        memset(&logicfont, 0, sizeof(logicfont));
-        wsprintf(logicfont.lfFaceName, TEXT("Consolas"));
-        //logicfont.lfCharSet = GB2312_CHARSET;
-        logicfont.lfHeight = 20;
-        hfont = CreateFontIndirect(&logicfont);
+        draw_text(hdc, clientrect, 0xFFFFFF, 0xFF0000, 50, &size);
 
-        colorref = 0xFF0000;
-        bgcolor = 0xFFFFFF;
+        rect = clientrect;
+        rect.top = 200;
 
-        drawtextparams.cbSize = sizeof(DRAWTEXTPARAMS);
-        drawtextparams.iTabLength = 2;
-        drawtextparams.iLeftMargin = 1;
-        drawtextparams.iRightMargin = 1;
-
-        SelectObject(hdc, hfont);
-        SetBkColor(hdc, bgcolor);
-        SetTextColor(hdc, colorref);
-
-        rect.top = 220;
-        rect.left = 0;
-        rect.right = clientrect.right;
-        rect.bottom = 400;
-
-        mbstowcs(whtml, html, strlen(html));
-
-        DrawTextEx(hdc, whtml, -1, &rect, DT_WORDBREAK | DT_EXPANDTABS, &drawtextparams);
+        draw_text(hdc, rect, 0xFFFFFF, 0x0000FF, 20, &size);
 
 		EndPaint(hWnd, &ps);
 		break;
