@@ -128,7 +128,6 @@ void node_scan(HDC hdc, tinyxml2::XMLElement* node, unsigned char *buffer, int b
     int i;
 
     if (node) {
-        printf("node %s\n", node->Value());
         for (i = 0; i < sizeof(attr_map) / sizeof(attr_map[0]); i++) {
             if (0 == strcmp(node->Value(), attr_map[i].name)) {
                 memset(buffer, 0, buffer_length);
@@ -185,6 +184,8 @@ static void preprocess(char* src, char* dest)
     }
 }
 
+int top = 20;
+
 static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
@@ -210,6 +211,15 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 	case WM_SIZE:
 		break;
 	case WM_KEYDOWN:
+        switch (wParam) {
+        case VK_PRIOR:
+            top += 100;
+            break;
+        case VK_NEXT:
+            top -= 100;
+        }
+        GetClientRect(hWnd, &rect);
+        InvalidateRect(hWnd, &rect, true);
 		break;
 	case WM_COMMAND:
 		break;
@@ -220,7 +230,9 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 
         rect.left = (clientrect.right - clientrect.left - 800) / 2;
         rect.right = rect.left + 800;
-        rect.top = 20;
+        rect.top = top;
+
+        printf("top %d\n", top);
 
         buffer_lenth = lstrlen(html) * 2;
 
@@ -271,7 +283,6 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
-		break;
 		break;
 	default:
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);
