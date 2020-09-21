@@ -1,65 +1,63 @@
 #include "common.h"
 
-extern void serial_port_list(void);
-extern void clipboard_list(void);
-extern const wchar_t* GetPredefinedClipboardFormatName(UINT format);
 
-extern void HTMLShow(HWND hwnd, const WCHAR* text);
+extern int FrameGenerator(void *arg);
+
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	MSG msg;
-	HWND hwnd;
-    FILE* fp;
-    int filesize;
-    char* content;
-    wchar_t* unicode_content;
+    HWND hwnd;
+    HANDLE hThread;
 
-    //AllocConsole();
-    //freopen("CONOUT$", "w", stdout);
+#if 1
+    AllocConsole();
+    freopen("CONOUT$", "w", stdout);
     //freopen("log.txt", "w", stdout);
+#endif
 
-	// Custom Window Class Register
-	CustomWindowClassesInit(hInstance);
+#if 0
+    CustomWindowClassesInit(hInstance);
 
-	//clipboard_list();
+    hThread = (HANDLE)_beginthreadex(NULL, 0, (_beginthreadex_proc_type)FrameGenerator, NULL, 0, NULL);
+    if (NULL == hThread)
+        return -1;
 
-	// Custom Window Create
-	hwnd = CreateWindowEx(
-		0, // dwExStyle
-		TEXT("HTMLBoard"),
-		TEXT("Demo"),
-		WS_OVERLAPPEDWINDOW | WS_VSCROLL| WS_HSCROLL,
-		300, 200, 1000, 400,
-		NULL, // hWndParent
-		NULL, // hMenu
-		hInstance,
-		NULL);
+#if 0
+    HMENU hRoot;
+    HMENU hPop1;
 
-    fp = fopen("demo.html", "r");
-    if (NULL != fp) {
-        fseek(fp, 0, SEEK_END);
-        filesize = ftell(fp);
-        fseek(fp, 0, SEEK_SET);
+    hRoot = CreateMenu();
+    hPop1 = CreatePopupMenu();
+    AppendMenu(hRoot, MF_POPUP, (UINT_PTR)hPop1, L"File");
+    AppendMenu(hPop1, MF_POPUP, (UINT_PTR)1, L"1");
+    AppendMenu(hPop1, MF_POPUP, (UINT_PTR)2, L"2");
+#endif
 
-        content = (char*)malloc(filesize + 1);
-        memset(content, 0, filesize + 1);
+    hwnd = CreateWindowEx(
+        0, // dwExStyle
+        TEXT("Game2Board"),
+        TEXT("Demo"), // Title
+#if 0
+        WS_OVERLAPPEDWINDOW | WS_VSCROLL | WS_HSCROLL,
+#else
+        WS_OVERLAPPEDWINDOW,
+#endif
+        0, 0, 800, 600,
+        NULL, // hWndParent
+#if 0
+        hRoot, // hMenu
+#else
+        NULL,
+#endif
+        hInstance,
+        NULL);
 
-        fread(content, 1, filesize, fp);
+    ShowWindow(hwnd, nShowCmd);
+    UpdateWindow(hwnd);
 
-        unicode_content = (wchar_t*)malloc(filesize * 2);
-        memset(unicode_content, 0, filesize * 2);
-
-        MultiByteToWideChar(CP_UTF8, 0, (char *)content, strlen(content), unicode_content, filesize * 2);
-
-        HTMLShow(hwnd, (const wchar_t *)unicode_content);
-    }
-    else {
-        HTMLShow(hwnd, L"<html><body><p>File not found!</p></body></html>");
-    }
-
-	ShowWindow(hwnd, nShowCmd);
-	UpdateWindow(hwnd);
+    SendMessage(hwnd, WM_USER, 0, 50);
+    SendMessage(hwnd, WM_USER+1, 10, 5);
 
 	while (GetMessage(&msg, NULL, 0, 0)) {
 		TranslateMessage(&msg);
@@ -67,4 +65,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	return (int)(msg.wParam);
+#endif
+    serial_port_list();
 }

@@ -28,6 +28,15 @@
     <Filter Include="源文件\XML">
       <UniqueIdentifier>{f812561e-7325-46d4-96f3-3713773efe63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Network">
+      <UniqueIdentifier>{6bdfb034-a1c9-423b-a557-087615aad0ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\IPC">
+      <UniqueIdentifier>{b829fdd5-25c4-4d8c-b26e-a18b8f92b761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\WorkThread">
+      <UniqueIdentifier>{8c8c521c-d8d1-4809-a761-d81ca68124a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\WinMain.cpp">
@@ -66,12 +75,96 @@
     <ClCompile Include="Source\XML\tinyxml2.cpp">
       <Filter>源文件\XML</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CustomWindowClasses\BitmapBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\socket.cpp">
+      <Filter>源文件\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\dbgserver.cpp">
+      <Filter>源文件\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ShareMemory.cpp">
+      <Filter>源文件\IPC</Filter>
+    </ClCompile>
+    <ClCompile Include="LogBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="ListBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="PaintBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapDynamicBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="TVBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameGenerator.cpp">
+      <Filter>源文件\WorkThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CustomWindowClasses\RingBufferBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CustomWindowClasses\ProgressBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="CMDBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="CardBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="PngBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="load_png.cpp">
+      <Filter>源文件\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="GameBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="CurveBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="DoubleBufferBoard.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawThread.cpp">
+      <Filter>源文件\WorkThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Game2Board.cpp">
+      <Filter>源文件\CustomWindowClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\common.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Include\tinyxml2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\getopt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\png.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\pngconf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\pnglibconf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\socket.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -232,8 +232,6 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
         rect.right = rect.left + 800;
         rect.top = top;
 
-        printf("top %d\n", top);
-
         buffer_lenth = lstrlen(html) * 2;
 
         buffer_orig = (unsigned char*)malloc(buffer_lenth);

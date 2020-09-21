@@ -1,0 +1,13 @@
+CountClipboardFormats = 5
+C0EB: HTML Format
+
+000D: CF_UNICODETEXT
+
+0010: CF_LOCALE
+
+0001: CF_TEXT
+Data Size = 14
+DragQueryFile
+
+0007: CF_OEMTEXT
+

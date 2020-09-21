@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include <stdio.h>
 
-HBITMAP hBitmap;
+static HBITMAP hBitmap;
 
 extern const wchar_t* GetPredefinedClipboardFormatName(UINT format);
 extern void hex_dump(unsigned char* buffer, unsigned int length);
