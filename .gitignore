@@ -1,6 +1,4 @@
-/Debug
-*.swp
-/.vs
-*.opendb
-*.db
-/x64
+.vs
+Debug/
+*.filters
+*.user

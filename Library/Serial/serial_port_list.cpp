@@ -7,7 +7,7 @@ void serial_port_list(void)
 {
     HKEY hKey;
     LPCTSTR lpSubKey = TEXT("HARDWARE\\DEVICEMAP\\SERIALCOMM\\");
-    wchar_t szValueName[NAME_LEN];
+    char szValueName[NAME_LEN];
     BYTE szPortName[NAME_LEN];
     LONG status;
     DWORD dwIndex = 0;
@@ -25,7 +25,8 @@ void serial_port_list(void)
 
         status = RegEnumValue(hKey, dwIndex++, szValueName, &dwSizeValueName, NULL, &Type, szPortName, &dwSizeofPortName);
         if (status == ERROR_SUCCESS) {
-            wprintf(L"%s\n", (wchar_t *)szPortName);
+            //wprintf(L"%s\n", (wchar_t *)szPortName);
+            printf("%s\n", (char *)szPortName);
         }
     } while ((status != ERROR_NO_MORE_ITEMS));
     
